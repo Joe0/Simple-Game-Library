@@ -1,5 +1,11 @@
 package info.javacoding.sgl.input;
 
+/**
+ * Listens for mouse events.
+ * 
+ * @author Joe Pritzel
+ * 
+ */
 public interface MouseListener {
 	/**
 	 * Fired when the state of a button is changed.

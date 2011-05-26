@@ -3,12 +3,20 @@ package info.javacoding.sgl.input;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Allows users to manage mouse listeners, and fires events when told to by the
+ * GameEngine.
+ * 
+ * @author Joe Pritzel
+ * 
+ */
 public class Mouse {
 
 	private static List<MouseListener> listeners = new ArrayList<MouseListener>();
 
 	/**
 	 * Registers a MouseListener.
+	 * 
 	 * @param m
 	 */
 	public static void registerListener(final MouseListener m) {
@@ -17,6 +25,7 @@ public class Mouse {
 
 	/**
 	 * Unregisters a MouseListener.
+	 * 
 	 * @param m
 	 */
 	public static void unregisterListener(final MouseListener m) {

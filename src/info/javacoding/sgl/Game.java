@@ -11,6 +11,14 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 
+/**
+ * The core of the SGL.<br>
+ * Used for scheduling task independent of the GameEngine, creating the Game
+ * window itself, etc.
+ * 
+ * @author Joe Pritzel
+ * 
+ */
 public class Game {
 
 	private static final int cores = Runtime.getRuntime().availableProcessors();

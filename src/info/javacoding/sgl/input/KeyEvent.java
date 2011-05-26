@@ -1,5 +1,11 @@
 package info.javacoding.sgl.input;
 
+/**
+ * A keyboard event.
+ * 
+ * @author Joe Pritzel
+ * 
+ */
 public class KeyEvent {
 	private final int eventKey;
 	private final char eventChar;

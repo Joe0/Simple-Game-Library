@@ -3,6 +3,14 @@ package info.javacoding.sgl.input;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class is essentially the controller for the keyboard. It fires events
+ * when told to by the GameEngine. It allows the users to manage hooks, and
+ * listeners for the keyboard.
+ * 
+ * @author Joe Pritzel
+ * 
+ */
 public class Keyboard {
 
 	private static List<KeyListener> listeners = new ArrayList<KeyListener>();
@@ -10,6 +18,7 @@ public class Keyboard {
 
 	/**
 	 * Registers a KeyListener.
+	 * 
 	 * @param m
 	 */
 	public static void registerListener(final KeyListener m) {
@@ -18,14 +27,16 @@ public class Keyboard {
 
 	/**
 	 * Unregisters a KeyListener.
+	 * 
 	 * @param m
 	 */
 	public static void unregisterListener(final KeyListener m) {
 		listeners.remove(m);
 	}
-	
+
 	/**
 	 * Calls the run method every time the keyboard is updated.
+	 * 
 	 * @param m
 	 */
 	public static void registerHook(final Runnable m) {
@@ -34,6 +45,7 @@ public class Keyboard {
 
 	/**
 	 * Removes the hook.
+	 * 
 	 * @param m
 	 */
 	public static void unregisterHook(final Runnable m) {
@@ -41,7 +53,7 @@ public class Keyboard {
 	}
 
 	/**
-	 * Called by the Game Engine.<br>
+	 * Called by the GameEngine.<br>
 	 * Runs all the KeyHooks, then fires all the events from the keyboard.
 	 */
 	public static void update() {

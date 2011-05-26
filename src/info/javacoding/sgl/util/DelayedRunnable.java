@@ -5,12 +5,18 @@ import info.javacoding.sgl.GameEngine;
 import java.util.concurrent.Delayed;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * If put into a collection that uses the Delayed interface, it works.
+ * 
+ * @author Joe Pritzel
+ * 
+ */
 public abstract class DelayedRunnable implements Delayed, Runnable {
 
 	private final long delay;
 	private final TimeUnit u;
 	private final long insertTime;
-	
+
 	/**
 	 * Creates a DelayedRunnable with a delay of 0ms.
 	 */
@@ -20,6 +26,7 @@ public abstract class DelayedRunnable implements Delayed, Runnable {
 
 	/**
 	 * Creates a DelayedRunnable with the specified delay in ms.
+	 * 
 	 * @param i
 	 */
 	public DelayedRunnable(final long i) {
@@ -28,6 +35,7 @@ public abstract class DelayedRunnable implements Delayed, Runnable {
 
 	/**
 	 * Creates a DelayedRunnable with the specified delay.
+	 * 
 	 * @param i
 	 * @param unit
 	 */

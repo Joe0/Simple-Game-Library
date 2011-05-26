@@ -13,62 +13,70 @@ import org.lwjgl.Sys;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 
+/**
+ * This class is the core of all Games.<br>
+ * It essentially controls the timing of everything.
+ * 
+ * @author Joe Pritzel
+ * 
+ */
 public class GameEngine {
 
 	/**
-	 * Set this to false to stop the GameEngine so you don't need to desroy Display.
+	 * Set this to false to stop the GameEngine so you don't need to desroy
+	 * Display.
 	 */
 	private static volatile boolean running = false;
-	
+
 	/**
 	 * The current time.
 	 */
 	private static volatile long time = (Sys.getTime() * 1000)
 			/ Sys.getTimerResolution();
-	
+
 	/**
 	 * The previous value for time.
 	 */
 	private static volatile long timeP = time;
-	
+
 	/**
 	 * Time delta.
 	 */
 	private static volatile long timeD = time - timeP;
-	
+
 	/**
 	 * The current FPS.
 	 */
 	private static int fps;
-	
+
 	/**
 	 * The last value for FPS before it was reset.
 	 */
 	private static volatile int lastFPSVal;
-	
+
 	/**
 	 * The last time the FPS was set.
 	 */
 	private static long lastFPS = time;
-	
+
 	/**
 	 * The current Scene.
 	 */
 	private static AtomicReference<Scene> currScene = new AtomicReference<Scene>(
 			null);
-	
+
 	/**
 	 * A list of loop tasks.
 	 */
 	private static final List<Runnable> loopTasks = new CopyOnWriteArrayList<Runnable>();
-	
+
 	/**
 	 * Tasks to do once.
 	 */
 	private static final Queue<DelayedRunnable> singleTask = new DelayQueue<DelayedRunnable>();
 
 	/**
-	 * Starts the GameEngine, and 
+	 * Starts the GameEngine, and
 	 */
 	protected static void start() {
 		running = true;
@@ -95,7 +103,7 @@ public class GameEngine {
 			info.javacoding.sgl.input.Mouse.update();
 			info.javacoding.sgl.input.Keyboard.update();
 			updateFPS();
-			while(!singleTask.isEmpty()) {
+			while (!singleTask.isEmpty()) {
 				singleTask.poll().run();
 			}
 			for (final Runnable r : loopTasks) {
@@ -144,7 +152,7 @@ public class GameEngine {
 		}
 		fps++;
 	}
-	
+
 	/**
 	 * @return The current FPS.
 	 */
@@ -154,6 +162,7 @@ public class GameEngine {
 
 	/**
 	 * Adds a task to the game loop.
+	 * 
 	 * @param r
 	 */
 	public static void addLoopTask(final Runnable r) {
@@ -162,6 +171,7 @@ public class GameEngine {
 
 	/**
 	 * Removes a task from the game loop.
+	 * 
 	 * @param r
 	 */
 	public static void removeLoopTask(final Runnable r) {
@@ -170,14 +180,16 @@ public class GameEngine {
 
 	/**
 	 * Sets the current Scene.
+	 * 
 	 * @param s
 	 */
 	public static void setCurrScene(final Scene s) {
 		currScene.set(s);
 	}
-	
+
 	/**
 	 * Adds a task that is executed once.
+	 * 
 	 * @param r
 	 */
 	public static void addSingleTask(final DelayedRunnable r) {

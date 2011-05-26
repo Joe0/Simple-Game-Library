@@ -1,5 +1,11 @@
 package info.javacoding.sgl.input;
 
+/**
+ * A mouse event.
+ * 
+ * @author Joe Pritzel
+ * 
+ */
 public class MouseEvent {
 	public static final int BUTTON1 = java.awt.event.MouseEvent.BUTTON1;
 	public static final int BUTTON2 = java.awt.event.MouseEvent.BUTTON2;
@@ -14,17 +20,19 @@ public class MouseEvent {
 
 	/**
 	 * Creates a MouseEvent with the given parameters.
+	 * 
 	 * @param x
 	 * @param y
 	 * @param button
 	 */
-	public MouseEvent(final int x, final int y, final int button, final boolean buttonState) {
+	public MouseEvent(final int x, final int y, final int button,
+			final boolean buttonState) {
 		this.x = x;
 		this.y = y;
 		this.button = button;
 		this.buttonState = buttonState;
 	}
-	
+
 	/**
 	 * @return The absolute x position.
 	 */
@@ -40,12 +48,12 @@ public class MouseEvent {
 	}
 
 	/**
-	 * @return The event button.  -1 if no button changed state.
+	 * @return The event button. -1 if no button changed state.
 	 */
 	public int getButton() {
 		return button;
 	}
-	
+
 	/**
 	 * @return The current buttons state.
 	 */
