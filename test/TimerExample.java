@@ -1,5 +1,3 @@
-import java.util.concurrent.TimeUnit;
-
 import info.javacoding.sgl.Game;
 import info.javacoding.sgl.GameEngine;
 import info.javacoding.sgl.graphic.Model;
@@ -32,14 +30,17 @@ public class TimerExample {
 
 		});
 
-		GameEngine.addLoopTask(new DelayedRunnable(1, TimeUnit.SECONDS) {
-
+		Game.scheduleFixedDelay(new Runnable() {
 			@Override
 			public void run() {
-				Display.setTitle("FPS: " + GameEngine.getFPS());
+				GameEngine.addSingleTask(new DelayedRunnable() {
+					@Override
+					public void run() {
+						Display.setTitle("FPS: " + GameEngine.getFPS());
+					}
+				});
 			}
-
-		});
+		}, 0, 1000);
 		final Scene s = new Scene();
 		s.addModel(0, new Model() {
 			@Override

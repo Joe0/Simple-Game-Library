@@ -84,7 +84,6 @@ public class Game {
 	 * gracefully.
 	 */
 	public static void stop() {
-		Display.destroy();
 		GameEngine.stop();
 		cachedThreadPool.shutdown();
 		scheduler.shutdown();
@@ -95,7 +94,6 @@ public class Game {
 	 * pool.
 	 */
 	public static void stopNow() {
-		Display.destroy();
 		GameEngine.stop();
 		cachedThreadPool.shutdownNow();
 		scheduler.shutdownNow();
@@ -175,14 +173,5 @@ public class Game {
 	public static void schedule(final Runnable runnable, final long delay,
 			final long period, final TimeUnit unit) {
 		scheduler.schedule(runnable, delay, unit);
-	}
-
-	/**
-	 * Schedules a task to run every 1,000ms.
-	 * 
-	 * @param runnable
-	 */
-	public static void addOneSecondScheduledTask(Runnable runnable) {
-		scheduleFixedRate(runnable, 0, 1000);
 	}
 }

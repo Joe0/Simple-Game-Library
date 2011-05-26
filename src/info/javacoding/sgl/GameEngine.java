@@ -107,6 +107,7 @@ public class GameEngine {
 			Display.update();
 		}
 		Display.destroy();
+		Game.stop();
 	}
 
 	/**
