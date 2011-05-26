@@ -9,8 +9,14 @@ import org.lwjgl.opengl.GL11;
 
 public class Scene {
 
+	/**
+	 * All the models by layer.
+	 */
 	private final Map<Integer, List<Model>> models = new HashMap<Integer, List<Model>>();
 
+	/**
+	 * Renders all the models starting with lowest layer, then in the order they were added.
+	 */
 	public final void render() {
 		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT
 				| GL11.GL_DEPTH_BUFFER_BIT);
@@ -21,6 +27,11 @@ public class Scene {
 		}
 	}
 
+	/**
+	 * Adds the model to the specified layer.
+	 * @param layer
+	 * @param m
+	 */
 	public void addModel(final int layer, final Model m) {
 		List<Model> ms = models.get(layer);
 		if (ms == null) {
@@ -30,6 +41,11 @@ public class Scene {
 		models.put(layer, ms);
 	}
 
+	/**
+	 * Removes the first model from the specified layer.
+	 * @param layer
+	 * @param m
+	 */
 	public void removeModel(final int layer, final Model m) {
 		final List<Model> ms = models.get(layer);
 		if (ms != null) {
@@ -37,6 +53,10 @@ public class Scene {
 		}
 	}
 
+	/**
+	 * Removes the first model from each layer..
+	 * @param m
+	 */
 	public void removeModel(final Model m) {
 		for (final List<Model> ms : models.values()) {
 			if (ms != null) {
@@ -45,6 +65,10 @@ public class Scene {
 		}
 	}
 	
+	/**
+	 * Removes the first model on the first layer.
+	 * @param m
+	 */
 	public void removeFirstModel(final Model m) {
 		for (final List<Model> ms : models.values()) {
 			if (ms != null) {

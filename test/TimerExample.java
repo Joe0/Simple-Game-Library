@@ -1,10 +1,12 @@
+import java.util.concurrent.TimeUnit;
+
 import info.javacoding.sgl.Game;
 import info.javacoding.sgl.GameEngine;
 import info.javacoding.sgl.graphic.Model;
 import info.javacoding.sgl.graphic.Scene;
 import info.javacoding.sgl.input.KeyEvent;
-import info.javacoding.sgl.input.KeyHook;
 import info.javacoding.sgl.input.KeyListener;
+import info.javacoding.sgl.util.DelayedRunnable;
 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
@@ -29,14 +31,14 @@ public class TimerExample {
 			}
 
 		});
-		
-		Game.addOneSecondScheduledTask(new Runnable() {
+
+		GameEngine.addLoopTask(new DelayedRunnable(1, TimeUnit.SECONDS) {
 
 			@Override
 			public void run() {
 				Display.setTitle("FPS: " + GameEngine.getFPS());
 			}
-			
+
 		});
 		final Scene s = new Scene();
 		s.addModel(0, new Model() {
@@ -76,7 +78,7 @@ public class TimerExample {
 		};
 		s.addModel(0, m1);
 		GameEngine.setCurrScene(s);
-		info.javacoding.sgl.input.Keyboard.registerHook(new KeyHook() {
+		info.javacoding.sgl.input.Keyboard.registerHook(new Runnable() {
 
 			@Override
 			public void run() {
@@ -103,14 +105,14 @@ public class TimerExample {
 			private boolean showM1 = true;
 
 			@Override
-			public void keyTyped(KeyEvent e) {
+			public void event(KeyEvent e) {
 				if (e.getKey() == Keyboard.KEY_RBRACKET && e.getState()) {
 					showM1 = !showM1;
 					if (showM1) {
 						s.addModel(0, m1);
 					} else {
 						s.removeModel(m1);
-					}					
+					}
 				}
 			}
 
