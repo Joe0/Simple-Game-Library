@@ -17,6 +17,7 @@ public class GameEngine {
 			/ Sys.getTimerResolution();
 	private static volatile long timeP = time, timeD = time - timeP;
 	private static int fps;
+	private static volatile int lastFPSVal;
 	private static long lastFPS = time;
 	private static AtomicReference<Scene> currScene = new AtomicReference<Scene>(
 			null);
@@ -68,11 +69,15 @@ public class GameEngine {
 
 	public static void updateFPS() {
 		if (time - lastFPS > 1000) {
-			Display.setTitle("FPS: " + fps);
+			lastFPSVal = fps;
 			fps = 0;
 			lastFPS += 1000;
 		}
 		fps++;
+	}
+	
+	public static int getFPS() {
+		return lastFPSVal;
 	}
 
 	public static void addLoopTask(final Runnable r) {

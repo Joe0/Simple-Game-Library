@@ -8,15 +8,13 @@ import info.javacoding.sgl.input.KeyListener;
 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 
 public class TimerExample {
 
-	float x = 400, y = 300;
-	float rotation = 0;
-	long lastFrame;
-	int fps;
-	long lastFPS;
+	private float x = 400, y = 300;
+	private float rotation = 0;
 
 	public void start() throws LWJGLException {
 		Game.create("Game", 800, 600);
@@ -25,11 +23,20 @@ public class TimerExample {
 			@Override
 			public void run() {
 				rotation += 0.15f * GameEngine.getTimeD();
-				if(rotation > 360) {
+				if (rotation > 360) {
 					rotation -= 360;
 				}
 			}
 
+		});
+		
+		Game.addOneSecondScheduledTask(new Runnable() {
+
+			@Override
+			public void run() {
+				Display.setTitle("FPS: " + GameEngine.getFPS());
+			}
+			
 		});
 		final Scene s = new Scene();
 		s.addModel(0, new Model() {
@@ -50,8 +57,7 @@ public class TimerExample {
 			}
 		});
 
-		final Scene s1 = new Scene();
-		s1.addModel(0, new Model() {
+		final Model m1 = new Model() {
 			@Override
 			public void render() {
 				GL11.glColor3f(1f, 1f, 0.5f);
@@ -67,7 +73,8 @@ public class TimerExample {
 				GL11.glEnd();
 				GL11.glPopMatrix();
 			}
-		});
+		};
+		s.addModel(0, m1);
 		GameEngine.setCurrScene(s);
 		info.javacoding.sgl.input.Keyboard.registerHook(new KeyHook() {
 
@@ -93,12 +100,17 @@ public class TimerExample {
 		});
 
 		info.javacoding.sgl.input.Keyboard.registerListener(new KeyListener() {
-			private int val = 0;
+			private boolean showM1 = true;
 
 			@Override
 			public void keyTyped(KeyEvent e) {
 				if (e.getKey() == Keyboard.KEY_RBRACKET && e.getState()) {
-					GameEngine.setCurrScene(val++ % 2 == 0 ? s : s1);
+					showM1 = !showM1;
+					if (showM1) {
+						s.addModel(0, m1);
+					} else {
+						s.removeModel(m1);
+					}					
 				}
 			}
 
