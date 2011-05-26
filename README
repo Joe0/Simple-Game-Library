@@ -1,0 +1,5 @@
+This is a simple library for rendering graphics, implementing game logic, etc.  It's backed by LWJGL for rendering graphics.
+
+The aim of this project is to make creating games simple by abstracting away common logic.
+
+The graphics portion is going to be geared towards 2D graphics, but should still support 3D graphics.
