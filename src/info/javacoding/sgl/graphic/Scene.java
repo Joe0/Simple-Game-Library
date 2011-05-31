@@ -1,9 +1,9 @@
 package info.javacoding.sgl.graphic;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.lwjgl.opengl.GL11;
 
@@ -19,7 +19,7 @@ public class Scene {
 	/**
 	 * All the models by layer.
 	 */
-	private final Map<Integer, List<Model>> models = new HashMap<Integer, List<Model>>();
+	private final Map<Integer, List<Model>> models = new ConcurrentHashMap<Integer, List<Model>>();
 
 	/**
 	 * Renders all the models starting with lowest layer, then in the order they
@@ -33,6 +33,10 @@ public class Scene {
 			}
 		}
 	}
+	
+	public List<Model> getModels(int layer) {
+		return models.get(layer);
+	}
 
 	/**
 	 * Adds the model to the specified layer.
@@ -43,7 +47,7 @@ public class Scene {
 	public void addModel(final int layer, final Model m) {
 		List<Model> ms = models.get(layer);
 		if (ms == null) {
-			ms = new ArrayList<Model>();
+			ms = new CopyOnWriteArrayList<Model>();
 		}
 		ms.add(m);
 		models.put(layer, ms);
